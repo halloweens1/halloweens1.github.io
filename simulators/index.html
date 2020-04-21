@@ -79,23 +79,17 @@
 
 
 
-<meta name="description" content="JoJo的小屋                                                                                  JoJo的小屋                                                                首页">
+<meta name="description" content="合并卡片模拟          .emptySet{         background-color: rgb(168, 168, 218);         border: 1px gray solid;         width: 100px;height: 120px;font-size: small;         margin-righ">
 <meta property="og:type" content="website">
 <meta property="og:title" content="halloweens1">
 <meta property="og:url" content="http://yoursite.com/simulators/index.html">
 <meta property="og:site_name" content="halloweens1">
-<meta property="og:description" content="JoJo的小屋                                                                                  JoJo的小屋                                                                首页">
+<meta property="og:description" content="合并卡片模拟          .emptySet{         background-color: rgb(168, 168, 218);         border: 1px gray solid;         width: 100px;height: 120px;font-size: small;         margin-righ">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/images/4.jpg">
-<meta property="og:image" content="http://yoursite.com/images/5.jpg">
-<meta property="og:image" content="http://yoursite.com/images/6.jpg">
-<meta property="og:image" content="http://yoursite.com/images/8.jpg">
-<meta property="og:image" content="http://yoursite.com/images/10.jpg">
-<meta property="og:updated_time" content="2020-04-21T14:03:51.806Z">
+<meta property="og:updated_time" content="2020-01-30T12:16:30.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="halloweens1">
-<meta name="twitter:description" content="JoJo的小屋                                                                                  JoJo的小屋                                                                首页">
-<meta name="twitter:image" content="http://yoursite.com/images/4.jpg">
+<meta name="twitter:description" content="合并卡片模拟          .emptySet{         background-color: rgb(168, 168, 218);         border: 1px gray solid;         width: 100px;height: 120px;font-size: small;         margin-righ">
 
 
 
@@ -270,333 +264,279 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JoJo的小屋</title>
-    <link rel="icon" type="images/x-icon" href="../images/12.jpg">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/customize.css">
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/vue.min.js"></script>
+    <title>合并卡片模拟</title>
+    <style>
+    .emptySet{
+        background-color: rgb(168, 168, 218);
+        border: 1px gray solid;
+        width: 100px;height: 120px;font-size: small;
+        margin-right: 10px;
+    }
+    .fullSet{
+        width: 100px;height: 120px;background-color: aqua;margin-right: 10px;font-size: x-small;border: 1px gray solid;
+    }
+    .preSet{
+        border: 1px gray solid;width: 100px;height: 120px;margin-right: 5px;
+    }
+    </style>
 </head>
 
-<body class="body1">
-    <nav class="navbar navbar-default" role="navigation" style="background-color: gainsboro;opacity: 0.8;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">JoJo的小屋</a>
+<body>
+    <div style="width: 630px;height: 200px;;">
+        <div style="float: left;">
+            <div style="display: flex;">
+                <div class="preSet" id="forCard1" ondragover="allowDrag(event)" ondrop="drop(event,'forCard1','forCard2')"></div>
+                <div style="width: 50px;height: 50px;border-radius: 50px;border: 1px gainsboro solid;margin: 35px 0;margin-right: 5px;text-align: center;line-height: 50px;">
+                    合并</div>
+                <div class="preSet" id="forCard2" ondragover="allowDrag(event)" ondrop="drop(event,'forCard2','forCard1')" style="margin-right: 0;"></div>
             </div>
-            <div>
-                <ul style="list-style: none;margin: 0;padding: 0;">
-                    <li class="navli"><a href="test.html">首页</a></li>
-                    <li class="navli"><a href="http://www.bilibili.com" target="_blank" rel="noopener">B站</a></li>
-                    <li class="navli"><a href="news.html">news</a></li>
-                    <li class="navli"><a href="pictures.html">JoJo图集</a></li>
-                    <li style="display: inline-block;">
-                        <div id="music-player" style="width:195px;height:50px;">
-                            <div id="left" style="width:150px;height:50px;float:right;position: relative;">
-                                <div style="overflow: hidden;">
-                                    <p id="music-name" style="font-size: 90%;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 0px;
-    line-height: 1.2;
-overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;"></p>
-                                </div>
-                                <div style="margin-left: 10px;height: 20px;display: flex;position: relative;">
-                                    <i id="last-music" class="fa fa-backward" style="position: absolute;left:0;top: 2px;"></i>
-                                    <i id="music-play" class="fa fa-play-circle-o" style="position: absolute;left: 25%;top: 2px;"></i>
-                                    <i id="next-music" class="fa fa-forward" style="position: absolute;left: 50%;top: 2px;"></i>
-                                    <div class="volume">
-                                        <i id="music-volume" class="fa fa-volume-up" style="position: absolute;left: 5px;top: 2px;cursor: pointer;"></i>
-                                        <div id="volume-progress" class="volume-progress">
-                                            <div id="volume-now" class="volume-now"></div>
-                                        </div>
-                                    </div>
-                                    <div id="music-progress" class="music-progress">
-                                        <div id="progress-now" class="progress-now"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="right" class="music-picture">
-                                <img class="music-cover" src>
-                            </div>
-
-                        </div>
-                    </li>
-                </ul>
+            <div style="margin:2px 50px;">
+                <button style="margin-right: 35px;" onclick="emerge('forCard1','forCard2')">确认合并</button><button onclick="cancel(event,'forCard1','forCard2')">取消</button>
             </div>
         </div>
-    </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-
-            </div>
-            <div class="col-md-3">
-
-            </div>
-        </div>
-        <audio id="m1" src>
-            <source src="audio/Tonight.mp3">
-            <source src="audio/Tonight.wav">
-        </audio>
-        <div class="row">
-            <div id="demo" class="carousel slide col-md-12" style="margin: auto;" data-ride="carousel">
-
-                <!-- 指示符 -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-
-                <!-- 轮播图片 -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="../images/4.jpg" width="1109px" height="400px">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../images/5.jpg" width="1109px" height="400px">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../images/6.jpg" width="1109px" height="400px">
-                    </div>
+        <div style="display: flex;float: right;border: 1px blue solid;padding: 5px;padding-bottom: 15px;">
+            <div class="fullSet">
+                <div id="card1" draggable="true" ondragstart="drag(event)">
+                <span style="color: red;">所有攻击力</span> <span id="frist">8.5</span>%<br>
+                <span style="color: red;">所有防御力</span> <span id="second">8.5</span>%<br>
+                <span id="Tfrist">冷却时间</span> <span id="third">5.1</span>%<br>
+                <span id="Tsecond">攻击速度</span> <span id="forth">5.4</span>%<br>
+                <span id="Tthird">回避率</span> <span id="fifth">5.7</span>%<br>
+                <span id="Tforth">无视防御</span> <span id="sixth">6</span>%
                 </div>
-
-                <!-- 左右切换按钮 -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-
             </div>
-            <!-- <video width="600px" height="338px;" controls src="black_widow.mp4"></video> -->
-        </div>
-        <div class="row">
-            <div class="col-md-6" style="margin-top: 5px;"><img src="../images/8.jpg" width="200px" height="300px" style="float: left;z-index: 2;">
-            <div>
-                <p> 空条承太郎<br>
-                  替身：白金之星<br>
-                  <span style="font-size: large;">      因为dio与乔斯特一家的宿命还没结束,空条承太郎背负起了斩断这一关系的使命,埃及打dio团走起,表面高冷,其实为人十分懂得为别人着想,(呀卡吗西!)</span><br>
-                  口头禅：呀嘞呀嘞Daze<br>
-                  <span style="color: red;">快点让无敌的Jo太狼想想办法呀！</span>
-                </p>
-            </div>
-            </div>
-            <div class="col-md-6" style="margin-top: 5px;"><img src="../images/10.jpg" width="200px" height="300px" style="float: left;z-index: 2;">
-                <div>
-                    <p style="line-height: 33px;">东方仗助<br>
-                      替身：疯狂钻石<br>
-                      <span>      摸一摸jo没有~,吉良吉影电台为您放送(误),平静的杜王町下竟藏着变态杀人魔?随着Jo太郎的调查，jiji的私生子东方仗助参上!<br>虽是普通的高中生,但却有强大的stando能力?!!(头发是本体的4Jo)</span><br>
-                      口头禅：great,lucky<br>
-                      <span style="color: red;">大家快来评价仗助的头型呀！(危)</span>
-                    </p>
+            <div class="fullSet" style="background-color:bisque">
+                <div id="card2" draggable="true" ondragstart="drag(event)">
+                <span style="color: red;">无视防御</span> <span id="frist">8.5</span>%<br>
+                <span style="color: red;">攻击速度</span> <span id="second">8.5</span>%<br>
+                <span id="Tfrist">冷却时间</span> <span id="third">5.1</span>%<br>
+                <span id="Tsecond">冰霜抗性</span> <span id="forth">5.4</span>%<br>
+                <span id="Tthird">回避率</span> <span id="fifth">5.7</span>%<br>
+                <span id="Tforth">所有攻击力</span> <span id="sixth">6</span>%
                 </div>
-                </div>
+            </div>
+            <div class="emptySet" style="margin-right: 0;">
+                
+            </div>
         </div>
     </div>
-
-
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script>
-    var i = 0;
-    var srcs = [{
-        src: '../audio/Tonight.mp3',
-        name: 'Tonight',
-        singer: 'luna',
-        img: '../images/timgR2O10C2W.jpg'
-    },
-    {
-        src: '../audio/have a nice day.mp3',
-        name: 'have a nice day',
-        singer: '浅葱喵asagiinyo',
-        img: '../images/music.jpg'
-    },
-    {
-        src: 'https://s320.xiami.net/258/23258/2102686304/1795498778_1485527256820.mp3?ccode=xiami_web_web&expire=86400&duration=226&psid=aa980d3c8b9d132d1d9fd0d10a52b4ae&ups_client_netip=182.90.9.253&ups_ts=1576228405&ups_userid=0&utid=DTELFmvIbSECAbZaH12Rjbg6&vid=1795498778&fn=1795498778_1485527256820.mp3&vkey=B86622c38df760ae3ef8e32e1b54de950',
-        name: 'scars to your beautiful',
-        singer: 'Alessia Cara',
-        img: 'https://pic.xiami.net/images/artistlogo/30/15428029303430.jpg?x-oss-process=image/resize,limit_0,s_410,m_fill/quality,q_80'
-    },
-    {
-        src: 'https://m7.music.126.net/20191213161349/1e13d15f99529682ff85dc9be18d4d1f/ymusic/900c/c2c8/2c61/98f3b38b4accaa32ccc9f7cf149bc067.mp3',
-        name: '喜欢你',
-        singer: '邓紫棋',
-        img: 'https://p3.music.126.net/u_1EudmF8Swgow6vfgYe1g==/8896148580676276.jpg?param=300y300'
-    },
-    {
-        src: 'https://m7.music.126.net/20191117115322/e2971f32890c320170359290bd159fbd/ymusic/1a8b/59d8/bad1/fd7e9782fcad8184ec8e4cce76950878.mp3',
-        name: '囚鸟',
-        singer: '彭羚',
-        img: 'https://p3.music.126.net/-R-s5y17BwyiR8NQBIduHg==/6654244371358544.jpg?param=300y300'
-    },
-    {
-        src: 'https://m8.music.126.net/20191213161256/32951c4d4a1eb7cbd6a8db6714147ce4/ymusic/0e09/065b/5158/9cd44169e3111cdec008f2e0864294d4.mp3',
-        name: '身骑白马',
-        singer: '徐佳莹',
-        img: 'https://p3.music.126.net/jSLMqcE_Yq27rRKDNrRKcA==/109951163187407183.jpg?param=300y300'
-    },
-    {
-        src: 'https://m8.music.126.net/20191213161208/9582355217c58165eece7f167c1ee952/ymusic/7096/cafa/51d1/d137f51d063c926cec569c7e3a991d8b.mp3',
-        name: '春夏秋冬',
-        singer: '张国荣',
-        img: 'https://p3.music.126.net/2YIpNoCzXfYgz4zIw3s0Vg==/73667279073787.jpg?param=300y300'
-    }];
-    var length = srcs.length - 1;
-    $(".music-cover").attr('src', srcs[i].img);
-    $("#m1").attr('src', srcs[i].src);
-    $("#music-name").text(srcs[i].name + '-' + srcs[i].singer);
-    var audios = $("#m1");
-    var a = audios[0];
-    $("#music-play").on('click', function () {
-        // a.paused
-        if ($("#music-play").hasClass("fa-play-circle-o")) {
-            Play();
-            $("#music-name").addClass("music-round");
-            $(".music-cover").addClass("music-circle");
-            $("#volume-now").width(a.volume * 49.5);
+function drag(ev){
+    ev.dataTransfer.setData("Text",ev.target.id);
+}
+function allowDrag(ev){
+    ev.preventDefault();
+}
+function drop(ev,target,secondTarget){
+    ev.preventDefault;
+    var data = ev.dataTransfer.getData("Text");
+    var color = document.getElementById(data).parentElement.style.backgroundColor;
+    var color2 = "";
+    if(document.getElementById(data).parentElement.id==target){
+        color2 = document.getElementById(secondTarget).style.backgroundColor;
+    }
+    else{
+        color2 = document.getElementById(target).style.backgroundColor;
+    }
+    if(document.getElementById(target).firstElementChild!=null){
+        if(document.getElementById(secondTarget).firstElementChild!=null){
+            // alert(color);
+            document.getElementById(target).style.backgroundColor = color;
+            // alert(color2);
+            document.getElementById(data).parentElement.style.backgroundColor = color2;
+            document.getElementById(data).parentElement.appendChild(document.getElementById(target).firstElementChild);
+            document.getElementById(target).appendChild(document.getElementById(data));
+            // document.getElementById(data).parentElement.appendChild(document.getElementById(target).firstElementChild);
+            return;
         }
-        else {
-            Pause();
-        }
-    })
-    $("#next-music").click(function () {
-        i = i == length ? 0 : i + 1;
-        Pause();
-        $("#m1").attr('src', srcs[i].src);
-        $("#music-name").text(srcs[i].name + '-' + srcs[i].singer);
-        $(".music-cover").attr('src', srcs[i].img);
-        $("#progress-now").width(0);
-        Play();
-        setTimeout(function () { $('#music-name').addClass('music-round'); }, 1000);
-        setTimeout(function () { $(".music-cover").addClass("music-circle");; }, 1000);
-    })
-    $("#last-music").click(function () {
-        i = i == 0 ? length : i - 1;
-        Pause();
-        $("#m1").attr('src', srcs[i].src);
-        $("#music-name").text(srcs[i].name + '-' + srcs[i].singer);
-        $(".music-cover").attr('src', srcs[i].img);
-        $("#progress-now").width(0);
-        Play();
-        setTimeout(function () { $('#music-name').addClass('music-round'); }, 1000);
-        setTimeout(function () { $(".music-cover").addClass("music-circle");; }, 800);
-    })
-
-    function nextMusic() {
-        if (a.ended) {
-            i = i == length ? 0 : i + 1;
-            Pause();
-            $("#m1").attr('src', srcs[i].src);
-            $("#music-name").text(srcs[i].name + '-' + srcs[i].singer);
-            $(".music-cover").attr('src', srcs[i].img);
-            $("#progress-now").width(0);
-            Play();
-            setTimeout(function () { $('#music-name').addClass('music-round'); }, 1000);
-            setTimeout(function () { $(".music-cover").addClass("music-circle");; }, 1000);
-        }
+    document.getElementById(data).parentElement.style.backgroundColor = "rgb(168, 168, 218)";
+    document.getElementById(data).parentElement.className = "emptySet";
+    // document.getElementById(data).parentElement.removeAttribute("background-color");
+    // document.getElementById(data).parentElement.id = "emptyCard";
+    document.getElementById(secondTarget).className = "fullSet";
+    document.getElementById(secondTarget).style.backgroundColor = color;
+    document.getElementById(secondTarget).appendChild(document.getElementById(data));
+    return;
     }
-
-    function Play() {
-        a.play();
-        $("#music-play").attr('class', 'fa fa-pause');
-        TimeSpan();
+    if(document.getElementById(data).parentElement.id==target||document.getElementById(data).parentElement.id==secondTarget){
+        document.getElementById(data).parentElement.style.backgroundColor = "#fff";
+        document.getElementById(data).parentElement.className = "preSet";
     }
-
-    function Pause() {
-        a.pause();
-        $("#music-play").attr('class', 'fa fa-play-circle-o');
-        $(".music-cover").removeClass("music-circle");
-        $("#music-name").removeClass("music-round");
-        ClearTimeSpan();
+    else{
+    document.getElementById(data).parentElement.style.backgroundColor = "rgb(168, 168, 218)";
+    document.getElementById(data).parentElement.className = "emptySet";
     }
-
-    function PlayNow(percent) {
-        a.currentTime = percent * a.duration;
-        $("#music-name").addClass("music-round");
-        $(".music-cover").addClass("music-circle");
-        $("#music-play").attr('class', 'fa fa-pause');
-        TimeSpan();
+    // document.getElementById(data).parentElement.removeAttribute("background-color");
+    // document.getElementById(data).parentElement.id = "emptyCard";
+    document.getElementById(target).className = "fullSet";
+    document.getElementById(target).style.backgroundColor = color;
+    ev.target.appendChild(document.getElementById(data));
+}
+function cancel(ev,forCard1,forCard2){
+    var cardFor1 = document.getElementById(forCard1);
+    var cardFor2 = document.getElementById(forCard2);
+    var card1 = "";
+    var card2 = "";
+    if(cardFor1.firstElementChild!=null){
+        card1 = document.getElementById(forCard1).firstElementChild.id;
+        // alert(card1);
+        var color = cardFor1.style.backgroundColor;
+        var emptySet1 = document.getElementsByClassName("emptySet")[0];
+        emptySet1.appendChild(document.getElementById(card1));
+        // cardFor1.removeChild(document.getElementById(card1));
+        emptySet1.style.backgroundColor = color;
+        cardFor1.style.backgroundColor = "#fff";
+        cardFor1.className = "preSet";
+        emptySet1.className = "fullSet";
     }
-
-    if (window.addEventListener) {
-        $("#music-progress")[0].addEventListener("mousedown", audioSeek);
-        a.addEventListener("timeupdate", nextMusic);
-        $("#volume-progress")[0].addEventListener("mousedown", volumeSeek);
+    if(cardFor2.firstElementChild!=null){
+        card2 = document.getElementById(forCard2).firstElementChild.id;
+        // alert(card2);
+        var color = cardFor2.style.backgroundColor;
+        var emptySet1 = document.getElementsByClassName("emptySet")[0];
+        emptySet1.appendChild(document.getElementById(card2));
+        emptySet1.style.backgroundColor = color;
+        cardFor2.style.backgroundColor = "#fff";
+        cardFor2.className = "preSet";
+        emptySet1.className = "fullSet";
     }
-    else {
-        $("#music-progress")[0].attachEvent("onmousedown", audioSeek);
-        $("#volume-progress")[0].attachEvent("onmousedown", volumeSeek);
+}
+function emerge(forCard1,forCard2){
+    var cardFor1 = document.getElementById(forCard1);
+    var cardFor2 = document.getElementById(forCard2);
+    if(cardFor1.firstElementChild==null||cardFor2.firstElementChild==null){
+        alert("请拖入想更改品质的卡片及要与其融合的卡片！");
+        return;
     }
-
-
-    function audioSeek(e) {
-        if (a.paused || a.ended) {
-            a.play();
-            resetAudio(e);
-        }
-        else {
-            resetAudio(e);
-        }
+    var quality = Math.floor(Math.random()*7+1);
+    var Tfrist = Math.floor(Math.random()*5+1);
+    var Tsecond = Math.floor(Math.random()*5+1);
+    var Tthird = Math.floor(Math.random()*5+1);
+    var Tforth = Math.floor(Math.random()*5+1);
+    switch (quality) {
+        case 1:
+            quality = 7.5;
+            break;
+        case 2:
+            quality = 8;
+            break;
+        case 3:
+            quality = 8.5;
+            break;
+        case 4:
+            quality = 9;
+            break;
+        case 5:
+            quality = 9.5;
+            break;
+        case 6:
+            quality = 10;
+            break;
+        case 7:
+            quality = 11;
+            break;
+        default:
+            break;
     }
-
-    function volumeSeek(e) {
-        resetVolume(e);
+    switch (Tfrist) {
+        case 1:
+            Tfrist = "暴击率";
+            break;
+        case 2:
+            Tfrist = "冷却时间";
+            break;
+        case 3:
+            Tfrist = "物理攻击力";
+            break;
+        case 4:
+            Tfrist = "移动速度";
+            break;
+        case 5:
+            Tfrist = "精神抗性";
+            break;
+        default:
+            break;
     }
-
-    function resetAudio(e) {
-        ClearTimeSpan();
-        var x = e.pageX - $("#left")[0].offsetLeft - 10;
-        var percent = x / 140;
-        $("#progress-now").width(x);
-        $("#volume-now").width(a.volume * 49.5);
-        PlayNow(percent);
+    switch (Tsecond) {
+        case 1:
+            Tsecond = "攻击速度";
+            break;
+        case 2:
+            Tsecond = "所有防御力";
+            break;
+        case 3:
+            Tsecond = "物理防御力";
+            break;
+        case 4:
+            Tsecond = "移动速度";
+            break;
+        case 5:
+            Tsecond = "冰霜抗性";
+            break;
+        default:
+            break;
     }
-
-    function resetVolume(e) {
-        // alert(e.pageX);
-        // alert($("#left")[0].offsetLeft);
-        // alert($("#volume-progress")[0].offsetLeft)
-        // alert($("#volume-progress").width()*0.1/2);
-        // alert($("#volume-progress")[0].offsetLeft-($("#volume-progress").width()*0.1)/2);
-        // alert($(".volume")[0].offsetLeft);
-        // alert($(".volume").width()*0.1/2);
-        // alert($(".volume")[0].offsetLeft-($(".volume").width()*0.1)/2);
-        var x = e.pageX - $("#left")[0].offsetLeft - 10 - ($(".volume")[0].offsetLeft - ($(".volume").width() * 0.1) / 2) - ($("#volume-progress")[0].offsetLeft - $("#volume-progress").width() * 0.1 / 2) - $(".volume").width() * 0.1 / 2;
-        // alert(x);
-        // alert($("#volume-progress").width()*1.1);
-        var percent = x / ($("#volume-progress").width() * 1.1);
-        a.volume = percent;
-        // alert(a.volume);
-        $("#volume-now").width(percent * ($("#volume-progress").width() * 1.1));
-        // alert($("#volume-now").width());
-        // alert($("#left")[0].offsetLeft);
-        // alert($("#volume-progress")[0].offsetLeft);
-        // alert($(".volume")[0].offsetLeft);
-
+    switch (Tthird) {
+        case 1:
+            Tthird = "能量攻击力";
+            break;
+        case 2:
+            Tthird = "能量防御力";
+            break;
+        case 3:
+            Tthird = "回避率";
+            break;
+        case 4:
+            Tthird = "回复率";
+            break;
+        case 5:
+            Tthird = "暴击伤害率";
+            break;
+        default:
+            break;
     }
-
-    function TimeSpan() {
-        setInterval("process()", 1000);
+    switch (Tforth) {
+        case 1:
+            Tforth = "能量攻击力";
+            break;
+        case 2:
+            Tforth = "所有防御力";
+            break;
+        case 3:
+            Tforth = "暴击率";
+            break;
+        case 4:
+            Tforth = "无视防御";
+            break;
+        case 5:
+            Tforth = "所有攻击力";
+            break;
+        default:
+            break;
     }
+    document.getElementById("frist").innerHTML = quality;
+    document.getElementById("second").innerHTML = quality;
+    document.getElementById("Tfrist").innerHTML = Tfrist;
+    document.getElementById("Tsecond").innerHTML = Tsecond;
+    document.getElementById("Tthird").innerHTML = Tthird;
+    document.getElementById("Tforth").innerHTML = Tforth;
+    var newCard = cardFor1.firstElementChild;
+    var color = cardFor1.style.backgroundColor;
 
-    function ClearTimeSpan() {
-        clearInterval("process()");
-    }
-
-    function process() {
-        //alert($("#music-progress").width());
-        // $("#progress-now").css.width = (a.currentTime/a.duration)*150;
-        $("#progress-now").width((a.currentTime / a.duration) * 140);
-    }
-
+    var emptySet = document.getElementsByClassName("emptySet")[0];
+    emptySet.style.backgroundColor = color;
+    emptySet.appendChild(newCard);
+    var endCard = cardFor2.firstElementChild;
+    cardFor2.removeChild(endCard);
+    cardFor1.style.backgroundColor = "#fff";
+    cardFor2.style.backgroundColor = "#fff";
+    cardFor1.className = "preSet";
+    cardFor2.className = "preSet";
+    emptySet.className = "fullSet";
+    
+}
 </script>
-
 </html>
         
       </div>
