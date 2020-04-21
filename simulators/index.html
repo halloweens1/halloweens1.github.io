@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="halloweens1">
 <meta property="og:description" content="合并卡片模拟          .emptySet{         background-color: rgb(168, 168, 218);         border: 1px gray solid;         width: 100px;height: 120px;font-size: small;         margin-righ">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-30T12:16:30.934Z">
+<meta property="og:updated_time" content="2020-04-21T15:06:30.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="halloweens1">
 <meta name="twitter:description" content="合并卡片模拟          .emptySet{         background-color: rgb(168, 168, 218);         border: 1px gray solid;         width: 100px;height: 120px;font-size: small;         margin-righ">
@@ -296,7 +296,7 @@
         </div>
         <div style="display: flex;float: right;border: 1px blue solid;padding: 5px;padding-bottom: 15px;">
             <div class="fullSet">
-                <div id="card1" draggable="true" ondragstart="drag(event)">
+                <div id="card1" onclick="clicked(this)" draggable="true" ondragstart="drag(event)">
                 <span style="color: red;">所有攻击力</span> <span id="frist">8.5</span>%<br>
                 <span style="color: red;">所有防御力</span> <span id="second">8.5</span>%<br>
                 <span id="Tfrist">冷却时间</span> <span id="third">5.1</span>%<br>
@@ -306,7 +306,7 @@
                 </div>
             </div>
             <div class="fullSet" style="background-color:bisque">
-                <div id="card2" draggable="true" ondragstart="drag(event)">
+                <div id="card2" onclick="clicked(this)" draggable="true" ondragstart="drag(event)">
                 <span style="color: red;">无视防御</span> <span id="frist">8.5</span>%<br>
                 <span style="color: red;">攻击速度</span> <span id="second">8.5</span>%<br>
                 <span id="Tfrist">冷却时间</span> <span id="third">5.1</span>%<br>
@@ -373,6 +373,59 @@ function drop(ev,target,secondTarget){
     document.getElementById(target).style.backgroundColor = color;
     ev.target.appendChild(document.getElementById(data));
 }
+
+function clicked(ev){
+    //alert(ev.id);
+    var target = 'forCard1';
+    var secondTarget = 'forCard2';
+    var data = ev.id;
+    if (document.getElementById(data).parentElement.id=='forCard1'){
+        target = 'forCard2';
+        secondTarget = 'forCard1';
+    }
+    var color = document.getElementById(data).parentElement.style.backgroundColor;
+    var color2 = "";
+    if(document.getElementById(data).parentElement.id==target){
+        color2 = document.getElementById(secondTarget).style.backgroundColor;
+    }
+    else{
+        color2 = document.getElementById(target).style.backgroundColor;
+    }
+    if(document.getElementById(target).firstElementChild!=null){
+        if(document.getElementById(secondTarget).firstElementChild!=null){
+            // alert(color);
+            document.getElementById(target).style.backgroundColor = color;
+            // alert(color2);
+            document.getElementById(data).parentElement.style.backgroundColor = color2;
+            document.getElementById(data).parentElement.appendChild(document.getElementById(target).firstElementChild);
+            document.getElementById(target).appendChild(document.getElementById(data));
+            // document.getElementById(data).parentElement.appendChild(document.getElementById(target).firstElementChild);
+            return;
+        }
+    document.getElementById(data).parentElement.style.backgroundColor = "rgb(168, 168, 218)";
+    document.getElementById(data).parentElement.className = "emptySet";
+    // document.getElementById(data).parentElement.removeAttribute("background-color");
+    // document.getElementById(data).parentElement.id = "emptyCard";
+    document.getElementById(secondTarget).className = "fullSet";
+    document.getElementById(secondTarget).style.backgroundColor = color;
+    document.getElementById(secondTarget).appendChild(document.getElementById(data));
+    return;
+    }
+    if(document.getElementById(data).parentElement.id==target||document.getElementById(data).parentElement.id==secondTarget){
+        document.getElementById(data).parentElement.style.backgroundColor = "#fff";
+        document.getElementById(data).parentElement.className = "preSet";
+    }
+    else{
+    document.getElementById(data).parentElement.style.backgroundColor = "rgb(168, 168, 218)";
+    document.getElementById(data).parentElement.className = "emptySet";
+    }
+    // document.getElementById(data).parentElement.removeAttribute("background-color");
+    // document.getElementById(data).parentElement.id = "emptyCard";
+    document.getElementById(target).className = "fullSet";
+    document.getElementById(target).style.backgroundColor = color;
+    document.getElementById(target).appendChild(document.getElementById(data));
+}
+
 function cancel(ev,forCard1,forCard2){
     var cardFor1 = document.getElementById(forCard1);
     var cardFor2 = document.getElementById(forCard2);
@@ -406,7 +459,7 @@ function emerge(forCard1,forCard2){
     var cardFor1 = document.getElementById(forCard1);
     var cardFor2 = document.getElementById(forCard2);
     if(cardFor1.firstElementChild==null||cardFor2.firstElementChild==null){
-        alert("请拖入想更改品质的卡片及要与其融合的卡片！");
+        alert("请点击或者拖入想更改品质的卡片及要与其融合的卡片！");
         return;
     }
     var quality = Math.floor(Math.random()*7+1);
