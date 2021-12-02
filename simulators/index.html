@@ -1,6 +1,23 @@
 <html>
+<body></body>
 <script>
 window.onload = function(){
+  var object = document.createElement("input");
+  object.style.opacity = 0;
+  object.style.position = 'absolute';
+  object.onfocus = function(){
+      document.activeElement.blur();
+  }
+  
+  document.body.appendChild(object);
+  var url = window.location.href;
+  console.log(url);
+  object.value = url;
+  object.select();
+  object.setSelectionRange(0, 99999); /* For mobile devices */
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(object.value);
+  // document.execCommand("copy");
   var a = document.createElement("a");
   a.href = "openapp://qcycwtjwine:8888/index";
 //a.href = "https://apple-app-site-association.tpwtsz.com/index";
