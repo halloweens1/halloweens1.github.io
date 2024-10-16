@@ -1,0 +1,230 @@
+<html>
+    <head>
+        <style>
+            body{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            body div:first-child{
+                width: 100%;
+                margin: 0 2vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            body div:first-child text{
+                margin: 3vh 0;
+            }
+            body div:first-child div{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+            }
+            body div:first-child div textarea{
+                flex: 1;
+                border-radius: 0.5rem;
+            }
+            body div:first-child div div{
+                width: 3dvb;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <text>hex 2 led protocol</text>
+            <div>
+                <textarea id="input" rows="20"></textarea>
+                <div></div>
+                <textarea id="output" rows="20"></textarea>
+            </div>
+            
+        </div>
+        <!-- <div>
+            <text>json 2 dart params</text>
+            <div>
+                <textarea id="input1" rows="20"></textarea>
+                <textarea id="output1" rows="20"></textarea>
+            </div>
+            
+        </div> -->
+    </body>
+    <script>
+        let textDecoder = new TextDecoder('utf-8');
+        let input = document.getElementById("input")
+        let output = document.getElementById("output")
+        input.addEventListener("input", ()=>{
+            console.log(input.value)
+            output.value = parse(input.value)
+        })
+
+        // let input1 = document.getElementById("input1")
+        // let output1 = document.getElementById("output1")
+        // input1.addEventListener("input", ()=>{
+        //     console.log(input1.value)
+        //     output1.value = parse1(input1.value)
+        // })
+
+
+        function parse(value){
+            let arr = value.split(' ')
+            let totalLen = arr.length
+            let str = `数组总长度: ${totalLen}\n\n`
+            
+
+            let temp
+            if(arr[0] != 54){
+                temp = arr.slice(0, 4)
+                str += `节目标识: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(4, 5)
+                str += `总分区数: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(5, 8)
+                str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(8, 12)
+                str += `第1分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(12, 16)
+                str += `第2分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(16, 20)
+                str += `第3分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(20, 24)
+                str += `第4分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+
+                temp = arr.slice(24, 28)
+                str += `起点坐标: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(28, 30)
+                str += `横长: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(30, 32)
+                str += `竖长: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(32, 35)
+                str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(35, 36)
+                str += `节目类型: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(36, 38)
+                str += `总帧数: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(38, 39)
+                str += `特效: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(39, 40)
+                str += `速度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(40, 41)
+                str += `停留时间: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(41, 42)
+                str += `环形边框: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(42, 43)
+                str += `亮度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(43, 46)
+                str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(46, totalLen)
+                str += `节目数据: ${temp.join(' ')}\n`
+                let save = temp
+                console.log('节目数据', save)
+                let len = save.length
+                let group = []
+                for(let i = 0; i < len; i+=3){
+                    group.push(save.slice(i, Math.min(i + 3, len)))
+                }
+                console.log('节目数据', group)
+            }else {
+                str += `识别码: ${arr[0]}\n`
+                str += `命令码: ${arr[1]}\n`
+                temp = arr.slice(2, 4)
+                str += `数据长度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                temp = arr.slice(4, 8)
+                let packetId = parseInt(temp.join(''), 16)
+                str += `包 id: ${temp.join(' ')} (${packetId})\n`
+                temp = arr.slice(8, 10)
+                str += `当前包数据长度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n\n`
+
+                if(packetId != 0){
+                    temp = arr.slice(10, totalLen - 2)
+                    str += `节目数据: ${temp.join(' ')}\n`
+                    let save = temp
+                    console.log('节目数据', save)
+                    let len = save.length
+                    let group = []
+                    for(let i = 0; i < len; i+=3){
+                        group.push(save.slice(i, Math.min(i + 3, len)))
+                    }
+                    console.log('节目数据', group)
+                }else{
+                    temp = arr.slice(10, 14)
+                    str += `节目唯一id: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(14, 15)
+                    str += `总分区个数: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(15, 18)
+                    str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(18, 22)
+                    str += `第1个分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(22, 26)
+                    str += `第2个分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(26, 30)
+                    str += `第3个分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(30, 34)
+                    str += `第4个分区开始位置: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n\n`
+
+                    temp = arr.slice(34, 38)
+                    str += `起点坐标: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(38, 40)
+                    str += `横长: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(40, 42)
+                    str += `竖长: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(42, 45)
+                    str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(45, 46)
+                    str += `节目类型: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(46, 48)
+                    str += `总帧数: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(48, 49)
+                    str += `特效: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(49, 50)
+                    str += `速度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(50, 51)
+                    str += `停留时间: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(51, 52)
+                    str += `环形边框: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(52, 53)
+                    str += `亮度: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(53, 56)
+                    str += `预留: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+                    temp = arr.slice(56, totalLen - 2)
+                    str += `节目数据: ${temp.join(' ')}\n`
+                    let save = temp
+                    console.log('节目数据', save)
+                    let len = save.length
+                    let group = []
+                    for(let i = 0; i < len; i+=3){
+                        group.push(save.slice(i, Math.min(i + 3, len)))
+                    }
+                    console.log('节目数据', group)
+                }
+
+                temp = arr.slice(totalLen - 2, totalLen)
+            str += `校验码: ${temp.join(' ')} (${parseInt(temp.join(''), 16)})\n`
+            }
+
+            
+            
+            return str
+        }
+
+        function parse1(value){
+            let json = JSON.parse(value)
+            let str = ''
+            let index = 0
+            let len = Object.keys(json).length
+            for(let key in json){
+                let type = typeof json[key]
+                if(type == 'number'){
+                   type = Number.isInteger(json[key]) ? 'int' : 'double'
+                }else{
+                    type = type.charAt(0).toUpperCase() + type.substr(1).toLowerCase()
+                }
+                str += 'required ' + type + ' ' + key
+                if(index + 1 < len){
+                    str += ', '
+                }
+                index++;
+            }
+            return str
+        }
+    </script>
+</html>
